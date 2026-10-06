@@ -1,0 +1,16 @@
+{{- /*
+┌┤ ! warning ├──────── ── ─
+│ body
+└───────────── ── ─
+shared renderer for the note/info/tip/warning/danger shortcodes.
+takes a dict: type, optional title, body (already rendered html).
+*/ -}}
+{{- $sigils := dict "note" "·" "info" "i" "tip" "+" "warning" "!" "danger" "x" -}}
+{{- $type := .type -}}
+{{- $sigil := index $sigils $type | default "·" -}}
+{{- $label := .title | default $type -}}
+<div class="box callout callout-{{ $type }}">
+  <div class="box-top"><span class="d" aria-hidden="true">┌┤</span><span class="t">{{ $sigil }} {{ $label }}</span><span class="d" aria-hidden="true">├</span><span class="fill" aria-hidden="true"></span></div>
+  <div class="box-in">{{ .body }}</div>
+  <div class="box-bot" aria-hidden="true"><span class="d">└</span><span class="fill"></span></div>
+</div>
