@@ -8,7 +8,8 @@
   <h1>{{ site.Title }}</h1>
   {{- end }}
   {{- with .Content }}
-  <div class="tagline"><span class="d" aria-hidden="true">·-=≡=-</span> {{ . }} <span class="d" aria-hidden="true">-=≡=-·</span></div>
+  {{- $tcols := add 14 (strings.RuneCount (strings.TrimSpace $.Plain)) }}
+  <div class="tagline" style="--tcols: {{ $tcols }}"><span class="d" aria-hidden="true">·-=≡=-</span> {{ . }} <span class="d" aria-hidden="true">-=≡=-·</span></div>
   {{- end }}
 </header>
 

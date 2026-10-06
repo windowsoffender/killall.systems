@@ -3,6 +3,7 @@
 :root {
   /* long runs of characters, clipped to whatever width they land in */
   --hline: "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────";
+  --hline2: "════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════";
   --vline: "│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│";
   --shade: "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
   --top: "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄";
@@ -38,7 +39,7 @@ body {
 .w {
   max-width: 80ch;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1.5rem;
 }
 
 @media (min-width: 640px) {
@@ -113,9 +114,16 @@ img { display: block; max-width: 100%; margin: 0 auto; }
 }
 
 /* ·-=≡=- centered text -=≡=-· */
-.tagline { margin: 1.5rem 0 0; text-align: center; }
+.tagline {
+  container-type: inline-size;
+  margin: 1.5rem 0 0;
+  text-align: center;
+  white-space: nowrap;
+  /* keep decorations on one line: shrink the font to fit, capped at 1rem.
+     --tcols is the line's char count, set per tagline in the template. */
+  font-size: min(1rem, 100cqw / (var(--tcols, 60) * 0.62));
+}
 .tagline p { display: inline; }
-.tagline .d { white-space: nowrap; }
 
 /* --------------------------------------------------------- headings */
 
@@ -142,6 +150,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .fill::before { content: var(--hline); flex: 1 1 0; min-width: 0; overflow: hidden; }
 .fill::after { content: " ── ─"; flex: none; }
+
+/* heading bars use a double line (boxes stay single) */
+.bar .fill::before { content: var(--hline2); }
+.bar .fill::after { content: " ══ ═"; }
 
 /* ------------------------------------------------------------ boxes */
 
