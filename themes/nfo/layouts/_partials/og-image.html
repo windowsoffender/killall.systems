@@ -1,0 +1,52 @@
+{{- /*
+returns the link preview image for a page.
+posts get og-post.png with their title, date and tags drawn on it,
+everything else gets the plain og.png banner.
+*/ -}}
+{{- $img := resources.Get "og.png" }}
+{{- if and .IsPage (in site.MainSections .Section) }}
+  {{- with resources.Get "og-post.png" }}
+
+    {{- /* wrap the title to lines of ~32 chars, max 3 lines */}}
+    {{- $lines := slice }}
+    {{- $cur := "" }}
+    {{- range split $.Title " " }}
+      {{- if and $cur (gt (add (strings.RuneCount $cur) (strings.RuneCount .)) 31) }}
+        {{- $lines = $lines | append $cur }}
+        {{- $cur = . }}
+      {{- else }}
+        {{- $cur = trim (printf "%s %s" $cur .) " " }}
+      {{- end }}
+    {{- end }}
+    {{- $lines = $lines | append $cur }}
+    {{- if gt (len $lines) 3 }}
+      {{- $lines = (first 2 $lines) | append (printf "%s..." (index $lines 2)) }}
+    {{- end }}
+    {{- $title := delimit $lines "\n" }}
+
+    {{- /* 2025-05-25  //  tag, tag, tag */}}
+    {{- $meta := $.Date | time.Format (site.Params.theme_config.date_format | default "2006-01-02") }}
+    {{- with $.GetTerms "tags" }}
+      {{- $tags := slice }}
+      {{- range . }}{{ $tags = $tags | append (.LinkTitle | lower) }}{{ end }}
+      {{- $meta = printf "%s  //  %s" $meta (delimit $tags ", ") | truncate 70 }}
+    {{- end }}
+
+    {{- $title_opts := dict "color" "#ffffff" "size" 60 "linespacing" 8 "x" 108 "y" 170 }}
+    {{- $meta_opts := dict "color" "#8c8c8c" "size" 28 "x" 108 "y" 425 }}
+
+    {{- /* put a .ttf at assets/fonts/og.ttf to use it instead of hugo's built-in font */}}
+    {{- $base := . }}
+    {{- with resources.Get "fonts/og.ttf" }}
+      {{- $title_opts = merge $title_opts (dict "font" .) }}
+      {{- $meta_opts = merge $meta_opts (dict "font" .) }}
+      {{- /* hugo caches drawn images and doesnt notice a new font file,
+             so name the base after the font's hash to force a redraw */}}
+      {{- $key := substr ((. | fingerprint).Data.Integrity | md5) 0 8 }}
+      {{- $base = resources.Copy (printf "og-post-%s.png" $key) $base }}
+    {{- end }}
+
+    {{- $img = $base | images.Filter (images.Text $title $title_opts) (images.Text $meta $meta_opts) }}
+  {{- end }}
+{{- end }}
+{{- return $img }}

@@ -1,0 +1,21 @@
+{{- /*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█ home █ posts █ about █▓▒░░░░░░░░░░░░░░░░░░▒▓█
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+links come from hugo's main menu, home is always first.
+*/ -}}
+{{- $page := . }}
+<nav class="nav">
+  <div class="top" aria-hidden="true"></div>
+  <div class="mid">
+    <span class="d" aria-hidden="true">█</span>
+    {{- if .IsHome }}<b aria-current="page"> home </b>{{ else }}<a href="{{ "" | relURL }}"> home </a>{{ end -}}
+    <span class="d" aria-hidden="true">█</span>
+    {{- range site.Menus.main }}
+      {{- if $page.IsMenuCurrent "main" . }}<b aria-current="page"> {{ .Name | lower }} </b>{{ else }}<a href="{{ .URL }}"> {{ .Name | lower }} </a>{{ end -}}
+      <span class="d" aria-hidden="true">█</span>
+    {{- end }}
+    <span class="d" aria-hidden="true">▓▒</span><span class="shade" aria-hidden="true"></span><span class="d" aria-hidden="true">▒▓█</span>
+  </div>
+  <div class="bot" aria-hidden="true"></div>
+</nav>

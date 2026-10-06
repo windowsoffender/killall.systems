@@ -1,0 +1,6 @@
+{{- if ne site.Params.theme_config.isShowFooter false }}
+<footer>
+  <hr>
+  <p class="tagline"><span class="d" aria-hidden="true">·-=≡=-</span> &copy; {{ now.Format "2006" }} {{ site.Title }} <span class="d" aria-hidden="true">-=≡=-·</span></p>
+</footer>
+{{- end }}

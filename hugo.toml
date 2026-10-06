@@ -1,4 +1,60 @@
 baseURL = 'https://killall.systems/'
 languageCode = 'en-us'
 title = 'killall.systems'
-theme = 'nostyleplease'
+theme = 'nfo'
+# theme = 'nostyleplease'
+# theme = 'vintage-web-hugo-theme'
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min      = "0.41.0"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+
+  [markup.highlight]
+    anchorLineNos      = false
+    codeFences         = true
+    guessSyntax        = false
+    hl_Lines           = ''
+    hl_inline          = false
+    lineAnchors        = ''
+    lineNoStart        = 1
+    lineNos            = false
+    lineNumbersInTable = true
+    noClasses          = true
+    noHl               = false
+    style              = 'modus-vivendi'
+    # style              = 'aura-theme-dark'
+    # style              = 'dracula'
+    tabWidth           = 4
+
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel   = 3
+    ordered    = false
+
+[params]
+  [params.theme_config]
+    appearance        = "dark"
+    back_home_text    = ".."
+    date_format       = "2006-01-02"
+    isListGroupByDate = false
+    isShowFooter      = true
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
+# links in the top bar, home is always there
+# pages can add themselves with menus = 'main' in their front matter
+[menus]
+  [[menus.main]]
+    name    = 'posts'
+    pageRef = '/posts'
+    weight  = 10

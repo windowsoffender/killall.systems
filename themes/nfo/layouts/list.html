@@ -1,0 +1,5 @@
+{{ define "main" }}
+{{ partial "bar.html" (dict "level" 1 "text" .Title) }}
+{{ .Content }}
+{{ partial "post_list.html" (dict "pages" .Pages) }}
+{{ end }}

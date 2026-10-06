@@ -1,0 +1,5 @@
+{{- if eq .Level 1 -}}
+{{ partial "bar.html" (dict "level" .Level "id" .Anchor "text" .Text) }}
+{{- else -}}
+<h{{ .Level }} id="{{ .Anchor }}" class="h"><span class="d" aria-hidden="true">{{ if eq .Level 2 }}■{{ else }}»{{ end }}</span><span class="t">{{ .Text }}</span>{{ if eq .Level 2 }}<span class="d tail" aria-hidden="true">─── ── ─</span>{{ end }}</h{{ .Level }}>
+{{- end -}}

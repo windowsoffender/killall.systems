@@ -1,0 +1,31 @@
+{{ define "main" }}
+<article>
+  {{- if in site.MainSections .Section }}
+  <header class="box">
+    <div class="box-top"><span class="d" aria-hidden="true">┌┤</span><span class="t">release info</span><span class="d" aria-hidden="true">├</span><span class="fill" aria-hidden="true"></span></div>
+    <div class="box-in">
+      <div class="kv">
+        <span class="k">title ..:</span><h1>{{ .Title }}</h1>
+        <span class="k">date ...:</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (site.Params.theme_config.date_format | default "2006-01-02") }}</time>
+        {{- with .GetTerms "tags" }}
+        <span class="k">tags ...:</span><span>{{ range $i, $t := . }}{{ if $i }}, {{ end }}<a href="{{ $t.RelPermalink }}">{{ $t.LinkTitle | lower }}</a>{{ end }}</span>
+        {{- end }}
+      </div>
+    </div>
+    <div class="box-bot" aria-hidden="true"><span class="d">└</span><span class="fill"></span></div>
+  </header>
+  {{- else }}
+  {{ partial "bar.html" (dict "level" 1 "text" .Title) }}
+  {{- end }}
+
+  {{- if .Params.toc }}
+  <aside class="box">
+    <div class="box-top"><span class="d" aria-hidden="true">┌┤</span><span class="t">contents</span><span class="d" aria-hidden="true">├</span><span class="fill" aria-hidden="true"></span></div>
+    <div class="box-in">{{ .TableOfContents }}</div>
+    <div class="box-bot" aria-hidden="true"><span class="d">└</span><span class="fill"></span></div>
+  </aside>
+  {{- end }}
+
+  {{ .Content }}
+</article>
+{{ end }}

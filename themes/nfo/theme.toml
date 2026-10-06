@@ -1,0 +1,4 @@
+name = "nfo"
+license = "MIT"
+description = "plain monospace theme with some warez scene .nfo flavor"
+min_version = "0.146.0"

@@ -1,0 +1,19 @@
+{{- $pages := .pages }}
+{{- $more := and .more .limit (gt (len $pages) .limit) }}
+{{- with .limit }}{{ $pages = first . $pages }}{{ end }}
+{{- $fmt := site.Params.theme_config.date_format | default "2006-01-02" }}
+<ul class="list">
+  {{- range $pages }}
+  <li>
+    {{- if .IsPage }}
+    <span class="k">{{ .Date | time.Format $fmt }}</span>
+    {{- else }}
+    <span class="k">[{{ printf "%02d" (len .Pages) }}]</span>
+    {{- end }}
+    <a href="{{ .RelPermalink }}">{{ if .IsPage }}{{ .Title }}{{ else }}{{ .Title | lower }}{{ end }}</a>
+  </li>
+  {{- end }}
+  {{- if $more }}
+  <li><span class="k" aria-hidden="true">»</span><a href="{{ .more_url | relURL }}">{{ .more_text | default "more..." }}</a></li>
+  {{- end }}
+</ul>

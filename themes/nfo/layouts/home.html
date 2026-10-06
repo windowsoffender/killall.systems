@@ -1,0 +1,38 @@
+{{ define "main" }}
+<header class="logo">
+  {{- with resources.Get "logo.txt" }}
+  {{- $cols := 0 }}
+  {{- range split .Content "\n" }}{{ $cols = math.Max $cols (strings.RuneCount .) }}{{ end }}
+  <h1><span class="vh">{{ site.Title }}</span><span class="art" aria-hidden="true" style="--cols: {{ $cols }}">{{ chomp .Content }}</span></h1>
+  {{- else }}
+  <h1>{{ site.Title }}</h1>
+  {{- end }}
+  {{- with .Content }}
+  <div class="tagline"><span class="d" aria-hidden="true">·-=≡=-</span> {{ . }} <span class="d" aria-hidden="true">-=≡=-·</span></div>
+  {{- end }}
+</header>
+
+{{ partial "nav.html" . }}
+
+{{ range hugo.Data.menu.entries }}
+  {{- if .url }}
+  <p><a href="{{ .url | relURL }}">{{ .title }}</a></p>
+  {{- else }}
+  <section>
+    {{ partial "bar.html" (dict "level" 2 "text" .title) }}
+    {{- with .entries }}
+    <ul>
+      {{- range . }}
+      <li><a href="{{ .url | relURL }}">{{ .title }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    {{- with .post_list }}
+    {{- $pages := where site.RegularPages "Section" "in" site.MainSections }}
+    {{- with .section }}{{ $pages = where site.RegularPages "Section" . }}{{ end }}
+    {{ partial "post_list.html" (dict "pages" $pages "limit" .limit "more" .show_more "more_text" .show_more_text "more_url" .show_more_url) }}
+    {{- end }}
+  </section>
+  {{- end }}
+{{ end }}
+{{ end }}

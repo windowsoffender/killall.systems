@@ -1,0 +1,259 @@
+/* nfo: a plain monospace theme with some warez scene .nfo flavor */
+
+:root {
+  /* long runs of characters, clipped to whatever width they land in */
+  --hline: "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────";
+  --vline: "│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│";
+  --shade: "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  --top: "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄";
+  --bot: "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀";
+}
+
+body {
+  --bg: #000000;
+  --fg: #ffffff;
+  --dim: #8c8c8c;
+  --link: #ffffff;
+  --hl: #2f3849;
+  color-scheme: dark;
+}
+
+/* -------------------------------------------------------------- base */
+
+html { height: 100%; font-size: 14px; }
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 1rem;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+::selection { background: var(--fg); color: var(--bg); }
+
+.w {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 640px) {
+  html { font-size: 16px; }
+  .w { padding: 4rem 2rem; }
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--dim);
+  text-underline-offset: 0.2em;
+}
+
+a:hover { text-decoration-color: var(--link); }
+
+p { margin: 1rem 0; }
+li { margin: 0.3rem 0; }
+
+img { display: block; max-width: 100%; margin: 0 auto; }
+
+*:target { background: var(--hl); }
+
+.d, .k { color: var(--dim); }
+
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------- nav */
+
+/*
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█ home █ posts █ about █▓▒░░░░▒▓█
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+*/
+.nav { margin: 0 0 3rem; line-height: 1.15; }
+.nav > div { white-space: pre; }
+
+.nav .top, .nav .bot { overflow: hidden; color: var(--dim); }
+.nav .top::before { content: var(--top); }
+.nav .bot::before { content: var(--bot); }
+
+.nav .mid { display: flex; }
+.nav .mid > * { flex: none; }
+.nav .shade { flex: 1 1 0; min-width: 2ch; overflow: hidden; color: var(--dim); }
+.nav .shade::before { content: var(--shade); }
+
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.nav b { background: var(--fg); color: var(--bg); }
+
+/* ------------------------------------------------------------- logo */
+
+.logo { container-type: inline-size; margin-bottom: 3rem; }
+
+.logo h1 { margin: 0; font-size: 1rem; font-weight: normal; }
+
+.logo .art {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  white-space: pre;
+  line-height: 1;
+  font-size: min(1rem, 100cqw / (var(--cols) * 0.61));
+  overflow: hidden;
+}
+
+/* ·-=≡=- centered text -=≡=-· */
+.tagline { margin: 1.5rem 0 0; text-align: center; }
+.tagline p { display: inline; }
+.tagline .d { white-space: nowrap; }
+
+/* --------------------------------------------------------- headings */
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem;
+}
+
+/* ─┤ text ├──────── ── ─ */
+.h { display: flex; align-items: baseline; gap: 1ch; }
+.h .d, .box-top .d, .box-bot .d { flex: none; }
+.h .t, .box-top .t { min-width: 0; }
+.h .tail { white-space: pre; }
+
+.fill {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 4ch;
+  overflow: hidden;
+  white-space: pre;
+  color: var(--dim);
+}
+
+.fill::before { content: var(--hline); flex: 1 1 0; min-width: 0; overflow: hidden; }
+.fill::after { content: " ── ─"; flex: none; }
+
+/* ------------------------------------------------------------ boxes */
+
+/*
+┌┤ label ├────── ── ─
+│ stuff
+└───────────── ── ─
+*/
+.box { margin: 1.5rem 0; line-height: 1.15; }
+
+.box-top, .box-bot { display: flex; align-items: baseline; }
+.box-top { gap: 1ch; }
+.box-top .t { font-weight: bold; }
+
+.box-in {
+  position: relative;
+  padding: 1lh 0 1lh 3ch;
+}
+
+.box-in::before {
+  content: var(--vline);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  white-space: pre;
+  overflow: hidden;
+  color: var(--dim);
+}
+
+.box ul { margin: 0; padding-left: 0; list-style: none; }
+.box ul ul { padding-left: 2ch; }
+.box li { margin: 0; }
+
+.kv {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1ch;
+}
+
+.kv h1 { margin: 0; }
+
+/* ------------------------------------------------------------ lists */
+
+.list { padding: 0; list-style: none; }
+
+.list li {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 2ch;
+}
+
+/* ---------------------------------------------------------- dividers */
+
+/* █▓▒░░░░░░░░░░░▒▓█ */
+hr {
+  display: flex;
+  height: auto;
+  margin: 2rem 0;
+  border: 0;
+  overflow: hidden;
+  white-space: pre;
+  line-height: 1;
+  color: var(--dim);
+}
+
+hr::before { content: "█▓▒" var(--shade); flex: 1 1 0; min-width: 0; overflow: hidden; }
+hr::after { content: "▒▓█"; flex: none; }
+
+footer { margin-top: 4rem; }
+footer .tagline { color: var(--dim); }
+
+/* ------------------------------------------------------------- code */
+
+pre, code { font-family: inherit; }
+
+:not(pre) > code {
+  padding: 0.1em 0.3em;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 90%;
+}
+
+pre {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.highlight { position: relative; margin: 2.5rem 0 1.5rem; }
+
+/* language label in the top right corner */
+.highlight code[data-lang]::before {
+  content: "┤ " attr(data-lang) " ├";
+  position: absolute;
+  top: -1.4em;
+  right: 0;
+  color: var(--dim);
+}
+
+/* --------------------------------------------------------- the rest */
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0 0 0 2ch;
+  border-left: 2px solid var(--dim);
+  color: var(--dim);
+}
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.4rem; border: 1px solid var(--dim); }
+
+figcaption { text-align: center; color: var(--dim); }
