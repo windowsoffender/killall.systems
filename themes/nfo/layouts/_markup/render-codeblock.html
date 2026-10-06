@@ -1,0 +1,16 @@
+{{- /*
+┌┤ c ├──────── ── ─
+│
+│  code, highlighted by hugo
+│
+└───────────── ── ─
+*/ -}}
+<div class="box code">
+  {{- with .Type }}
+  <div class="box-top" aria-hidden="true"><span class="d">┌┤</span><span class="t">{{ . }}</span><span class="d">├</span><span class="fill"></span></div>
+  {{- else }}
+  <div class="box-top plain" aria-hidden="true"><span class="d">┌</span><span class="fill"></span></div>
+  {{- end }}
+  <div class="box-in">{{ (transform.HighlightCodeBlock .).Wrapped }}</div>
+  <div class="box-bot" aria-hidden="true"><span class="d">└</span><span class="fill"></span></div>
+</div>

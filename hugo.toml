@@ -29,9 +29,9 @@ theme = 'nfo'
     lineNumbersInTable = true
     noClasses          = true
     noHl               = false
-    style              = 'modus-vivendi'
+    # style              = 'modus-vivendi'
     # style              = 'aura-theme-dark'
-    # style              = 'dracula'
+    style              = 'dracula'
     tabWidth           = 4
 
   [markup.tableOfContents]
