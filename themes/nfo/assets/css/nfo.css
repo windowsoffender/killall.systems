@@ -134,10 +134,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ─┤ text ├──────── ── ─ */
-.h { display: flex; align-items: baseline; gap: 1ch; }
+.h { display: flex; align-items: baseline; }
 .h .d, .box-top .d, .box-bot .d { flex: none; }
-.h .t, .box-top .t { min-width: 0; }
-.h .tail { white-space: pre; }
+.h .t, .box-top .t { min-width: 0; padding: 0 1ch; }
 
 .fill {
   display: flex;
@@ -149,11 +148,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .fill::before { content: var(--hline); flex: 1 1 0; min-width: 0; overflow: hidden; }
-.fill::after { content: " ── ─"; flex: none; }
+.fill::after { content: ""; flex: none; }
 
 /* heading bars use a double line (boxes stay single) */
 .bar .fill::before { content: var(--hline2); }
-.bar .fill::after { content: " ══ ═"; }
+
+/* close boxes on the right with corners (headings stay open) */
+.box-top .fill::after { content: "┐"; }
+.box-bot .fill::after { content: "┘"; }
 
 /* ------------------------------------------------------------ boxes */
 
@@ -165,25 +167,26 @@ h1, h2, h3, h4, h5, h6 {
 .box { margin: 1.5rem 0; line-height: 1.15; }
 
 .box-top, .box-bot { display: flex; align-items: baseline; }
-.box-top { gap: 1ch; }
-.box-top.plain { gap: 0; }
 .box-top .t { font-weight: bold; }
 
 .box-in {
   position: relative;
-  padding: 1lh 0 1lh 3ch;
+  padding: 1lh 3ch;
 }
 
-.box-in::before {
+/* left and right │ columns that run the full height of the box */
+.box-in::before,
+.box-in::after {
   content: var(--vline);
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
   white-space: pre;
   overflow: hidden;
   color: var(--dim);
 }
+.box-in::before { left: 0; }
+.box-in::after { right: 0; }
 
 .box ul { margin: 0; padding-left: 0; list-style: none; }
 .box ul ul { padding-left: 2ch; }
