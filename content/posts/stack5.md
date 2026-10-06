@@ -230,7 +230,9 @@ This address is the stack address. We can now update that in the exploit.
 rip = p64(0x7fffffffebe8 + 40) # new rip -> rsp
 ```
 
-> Notice I am also adding `+ 40` to the address just to make sure we hit our nop slide.
+{{< note >}}
+Notice I am also adding `+ 40` to the address just to make sure we hit our nop slide.
+{{< /note >}}
 
 ### Step 2 - nop slide
 

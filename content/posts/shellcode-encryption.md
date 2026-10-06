@@ -129,7 +129,9 @@ xored_shellcode = bytes([x ^ 0xac for x in shellcode])
 
 Encrypted each byte of the shellcode with the key `0xac`.
 
-> Why specically `0xac`? No reason, It just didn't produce any blacklisted bytes.
+{{< note >}}
+Why specically `0xac`? No reason, It just didn't produce any blacklisted bytes.
+{{< /note >}}
 
 ![Encrypted shellcode banned bytes](/posts/img/encshellcodecheck.png)
 
