@@ -1,7 +1,7 @@
 {{- if ne site.Params.theme_config.isShowFooter false }}
 <footer>
   <hr>
-  {{- $fcols := add 14 (strings.RuneCount (printf "© %s %s" (now.Format "2006") site.Title)) }}
-  <p class="tagline" style="--tcols: {{ $fcols }}"><span class="d" aria-hidden="true">·-=≡=-</span> &copy; {{ now.Format "2006" }} {{ site.Title }} <span class="d" aria-hidden="true">-=≡=-·</span></p>
+  {{- $fcols := add 14 (strings.RuneCount (printf "🅮 %s %s" (now.Format "2006") site.Title)) }}
+  <p class="tagline" style="--tcols: {{ $fcols }}"><span class="d" aria-hidden="true">·-=≡=-</span> <span title="Public domain (Unlicense)">&#x1F16E;</span> {{ now.Format "2006" }} {{ site.Title }} <span class="d" aria-hidden="true">-=≡=-·</span></p>
 </footer>
 {{- end }}

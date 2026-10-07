@@ -22,11 +22,12 @@
     lineNumbersInTable = true
     noClasses          = true
     noHl               = false
-    style              = 'monokai'
+    style              = 'modus-vivendi'
+    style              = 'rrt'
     tabWidth           = 4
 
   [markup.tableOfContents]
-    startLevel = 2
+    startLevel = 1
     endLevel   = 3
     ordered    = false
 

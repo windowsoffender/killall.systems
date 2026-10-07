@@ -1,1 +1,1 @@
-I hate computers.
+binary exploitation and reverse engineering
