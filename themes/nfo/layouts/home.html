@@ -1,9 +1,41 @@
 {{ define "main" }}
 <header class="logo">
-  {{- with resources.Get "logo.txt" }}
-  {{- $cols := 0 }}
-  {{- range split .Content "\n" }}{{ $cols = math.Max $cols (strings.RuneCount .) }}{{ end }}
-  <h1><span class="vh">{{ site.Title }}</span><span class="art" aria-hidden="true" style="--cols: {{ $cols }}">{{ chomp .Content }}</span></h1>
+  {{- /* logo.txt plus anything in logos/*.txt, one is picked at random on load */}}
+  {{- $logos := slice }}
+  {{- with resources.Get "logo.txt" }}{{ $logos = $logos | append . }}{{ end }}
+  {{- range resources.Match "logos/*.txt" }}{{ $logos = $logos | append . }}{{ end }}
+  {{- with $logos }}
+  <h1><span class="vh">{{ site.Title }}</span>
+    {{- range $i, $logo := . }}
+    {{- /* terminal color codes (ESC[0;97;44m etc) become spans, see .art .f* / .b* in the css */}}
+    {{- $cols := 0 }}
+    {{- range split (replaceRE `\x1b\[[0-9;]*m` "" $logo.Content) "\n" }}{{ $cols = math.Max $cols (strings.RuneCount .) }}{{ end }}
+    {{- $art := chomp $logo.Content | htmlEscape }}
+    {{- $art = replaceRE `\x1b\[0;(\d+);(\d+)m` `</span><span class="f$1 b$2">` $art }}
+    {{- $art = replaceRE `\x1b\[0;(\d+)m` `</span><span class="f$1">` $art }}
+    {{- $art = replaceRE `\x1b\[0?m` `</span><span>` $art }}
+    <span class="art" aria-hidden="true" style="--cols: {{ $cols }}"{{ if $i }} hidden{{ end }}><span>{{ $art | safeHTML }}</span></span>
+    {{- end }}
+  </h1>
+  <script>
+    (() => {
+      const a = document.querySelectorAll(".logo .art");
+      a[0].hidden = true;
+      // never show the same one twice in a row: pick from the others, skipping last
+      let last = -1;
+      try { last = +(localStorage.getItem("logo") ?? -1); } catch {}
+      const skip = a.length > 1 && last >= 0 && last < a.length;
+      let i = Math.floor(Math.random() * (a.length - skip));
+      if (skip && i >= last) i++;
+      try { localStorage.setItem("logo", i); } catch {}
+      const art = a[i];
+      art.hidden = false;
+      // measure the font's real char width so narrow screens fit exactly
+      const cols = +getComputedStyle(art).getPropertyValue("--cols");
+      const em = parseFloat(getComputedStyle(art).fontSize);
+      art.style.setProperty("--ch", art.scrollWidth / cols / em);
+    })();
+  </script>
   {{- else }}
   <h1>{{ site.Title }}</h1>
   {{- end }}

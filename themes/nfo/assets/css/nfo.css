@@ -109,9 +109,33 @@ img { display: block; max-width: 100%; margin: 0 auto; }
   margin: 0 auto;
   white-space: pre;
   line-height: 1;
-  font-size: min(1rem, 100cqw / (var(--cols) * 0.61));
+  /* fill the column like the nav bar. the column is 80ch of 1rem text,
+     so 80rem / cols matches it exactly on desktop. on narrow screens
+     fit the container width. --ch is the font's char width in em,
+     measured by the script in home.html, 0.6 if js is off. */
+  font-size: min(80rem / var(--cols), 100cqw / (var(--cols) * var(--ch, 0.6)));
   overflow: hidden;
 }
+
+.logo .art[hidden] { display: none; }
+
+/* the 16 terminal colors, for logos saved with color codes */
+.art .f30 { color: #000000; }  .art .b40 { background: #000000; }
+.art .f31 { color: #aa0000; }  .art .b41 { background: #aa0000; }
+.art .f32 { color: #00aa00; }  .art .b42 { background: #00aa00; }
+.art .f33 { color: #aa5500; }  .art .b43 { background: #aa5500; }
+.art .f34 { color: #0000aa; }  .art .b44 { background: #0000aa; }
+.art .f35 { color: #aa00aa; }  .art .b45 { background: #aa00aa; }
+.art .f36 { color: #00aaaa; }  .art .b46 { background: #00aaaa; }
+.art .f37 { color: #aaaaaa; }  .art .b47 { background: #aaaaaa; }
+.art .f90 { color: #555555; }  .art .b100 { background: #555555; }
+.art .f91 { color: #ff5555; }  .art .b101 { background: #ff5555; }
+.art .f92 { color: #55ff55; }  .art .b102 { background: #55ff55; }
+.art .f93 { color: #ffff55; }  .art .b103 { background: #ffff55; }
+.art .f94 { color: #5555ff; }  .art .b104 { background: #5555ff; }
+.art .f95 { color: #ff55ff; }  .art .b105 { background: #ff55ff; }
+.art .f96 { color: #55ffff; }  .art .b106 { background: #55ffff; }
+.art .f97 { color: #ffffff; }  .art .b107 { background: #ffffff; }
 
 /* ·-=≡=- centered text -=≡=-· */
 .tagline {
