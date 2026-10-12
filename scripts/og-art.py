@@ -6,7 +6,7 @@ draws the braille art for the link previews into themes/nfo/assets
   og-post-art.txt  crosshair sigil + stars, for og-post.png (hugo adds the title)
 
 shapes are drawn as a big black and white picture first, then turned into
-braille, 2x4 dots per character. run python3 og.py after this to redraw the pngs.
+braille, 2x4 dots per character. run python3 scripts/og.py after this to redraw the pngs.
 needs pillow and numpy
 """
 import math, random
@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
-root = Path(__file__).resolve().parent
+root = Path(__file__).resolve().parent.parent
 assets = root / "themes/nfo/assets"
 
 W, H = 1200, 630
@@ -143,4 +143,4 @@ def braille(p):
 
 (assets / "og-art.txt").write_text(braille(stars()), encoding="utf-8")
 (assets / "og-post-art.txt").write_text(braille(crosshair()), encoding="utf-8")
-print("wrote og-art.txt and og-post-art.txt, now run python3 og.py")
+print("wrote og-art.txt and og-post-art.txt, now run python3 scripts/og.py")

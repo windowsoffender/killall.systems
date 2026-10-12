@@ -6,13 +6,13 @@ redraws the link preview images in themes/nfo/assets
   og-post.png  og-post-art.txt (braille crosshair + stars), hugo draws the
                post title on top of it (see layouts/_partials/og-image.html)
 
-run it after changing logo.txt or either art file:  python3 og.py
+run it after changing logo.txt or either art file:  python3 scripts/og.py
 needs pillow and the font at assets/fonts/og.ttf
 """
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-root = Path(__file__).resolve().parent
+root = Path(__file__).resolve().parent.parent
 assets = root / "themes/nfo/assets"
 font = root / "assets/fonts/og.ttf"
 
