@@ -7,11 +7,11 @@ everything else gets the plain og.png banner.
 {{- if and .IsPage (in site.MainSections .Section) }}
   {{- with resources.Get "og-post.png" }}
 
-    {{- /* wrap the title to lines of ~32 chars, max 3 lines */}}
+    {{- /* wrap the title to lines of ~34 chars, max 3 lines */}}
     {{- $lines := slice }}
     {{- $cur := "" }}
     {{- range split $.Title " " }}
-      {{- if and $cur (gt (add (strings.RuneCount $cur) (strings.RuneCount .)) 31) }}
+      {{- if and $cur (gt (add (strings.RuneCount $cur) (strings.RuneCount .)) 33) }}
         {{- $lines = $lines | append $cur }}
         {{- $cur = . }}
       {{- else }}
@@ -32,12 +32,19 @@ everything else gets the plain og.png banner.
       {{- $meta = printf "%s  //  %s" $meta (delimit $tags ", ") | truncate 70 }}
     {{- end }}
 
-    {{- $title_opts := dict "color" "#ffffff" "size" 60 "linespacing" 8 "x" 108 "y" 170 }}
-    {{- $meta_opts := dict "color" "#8c8c8c" "size" 28 "x" 108 "y" 425 }}
+    {{- /* site name, title and meta stacked and centered in the middle of the image.
+           heights: name 20 + gap 16, title 56 a line, gap 14, meta 24 */}}
+    {{- $n := len $lines }}
+    {{- $h := add 36 (mul $n 56) 14 24 }}
+    {{- $y := sub 312 (div $h 2) }}
+    {{- $name_opts := dict "color" "#8c8c8c" "size" 20 "x" 600 "y" $y "alignx" "center" }}
+    {{- $title_opts := dict "color" "#ffffff" "size" 48 "linespacing" 8 "x" 600 "y" (add $y 36) "alignx" "center" }}
+    {{- $meta_opts := dict "color" "#8c8c8c" "size" 24 "x" 600 "y" (add $y 36 (mul $n 56) 14) "alignx" "center" }}
 
     {{- /* put a .ttf at assets/fonts/og.ttf to use it instead of hugo's built-in font */}}
     {{- $base := . }}
     {{- with resources.Get "fonts/og.ttf" }}
+      {{- $name_opts = merge $name_opts (dict "font" .) }}
       {{- $title_opts = merge $title_opts (dict "font" .) }}
       {{- $meta_opts = merge $meta_opts (dict "font" .) }}
       {{- /* hugo caches drawn images and doesnt notice a new font file,
@@ -46,7 +53,7 @@ everything else gets the plain og.png banner.
       {{- $base = resources.Copy (printf "og-post-%s.png" $key) $base }}
     {{- end }}
 
-    {{- $img = $base | images.Filter (images.Text $title $title_opts) (images.Text $meta $meta_opts) }}
+    {{- $img = $base | images.Filter (images.Text site.Title $name_opts) (images.Text $title $title_opts) (images.Text $meta $meta_opts) }}
   {{- end }}
 {{- end }}
 {{- return $img }}
