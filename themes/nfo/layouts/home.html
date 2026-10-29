@@ -18,22 +18,23 @@
     {{- end }}
   </h1>
   <script>
-    (() => {
-      const a = document.querySelectorAll(".logo .art");
+    // old school js (var, no arrows) so safari 8 can run it
+    (function () {
+      var a = document.querySelectorAll(".logo .art");
       a[0].hidden = true;
       // never show the same one twice in a row: pick from the others, skipping last
-      let last = -1;
-      try { last = +(localStorage.getItem("logo") ?? -1); } catch {}
-      const skip = a.length > 1 && last >= 0 && last < a.length;
-      let i = Math.floor(Math.random() * (a.length - skip));
+      var last = -1;
+      try { var saved = localStorage.getItem("logo"); if (saved !== null) last = +saved; } catch (e) {}
+      var skip = a.length > 1 && last >= 0 && last < a.length;
+      var i = Math.floor(Math.random() * (a.length - skip));
       if (skip && i >= last) i++;
-      try { localStorage.setItem("logo", i); } catch {}
-      const art = a[i];
+      try { localStorage.setItem("logo", i); } catch (e) {}
+      var art = a[i];
       art.hidden = false;
       // measure the font's real char width so narrow screens fit exactly
-      const cols = +getComputedStyle(art).getPropertyValue("--cols");
-      const em = parseFloat(getComputedStyle(art).fontSize);
-      art.style.setProperty("--ch", art.scrollWidth / cols / em);
+      var cols = +getComputedStyle(art).getPropertyValue("--cols");
+      var em = parseFloat(getComputedStyle(art).fontSize);
+      if (cols) art.style.setProperty("--ch", art.scrollWidth / cols / em);
     })();
   </script>
   {{- else }}

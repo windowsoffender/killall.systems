@@ -44,5 +44,29 @@
     {{- block "main" . }}{{ end }}
     {{- partial "footer.html" . }}
   </main>
+  <script>
+    // the logo and taglines size themselves with css min() and container
+    // units. old browsers (safari 8 etc) dont have those, so fit them here
+    (function () {
+      if (window.CSS && CSS.supports && CSS.supports("width", "min(1px, 1cqw)")) return;
+      function fit() {
+        var els = document.querySelectorAll(".logo .art, .tagline");
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          if (el.hidden) continue;
+          el.style.fontSize = "";
+          var w = el.scrollWidth;
+          if (!w) continue;
+          // the logo grows or shrinks to fill the column, taglines only shrink
+          var s = el.parentNode.clientWidth / w;
+          if (el.className == "tagline") s = Math.min(s, 1);
+          var px = parseFloat(getComputedStyle(el).fontSize) * s;
+          el.style.fontSize = Math.floor(px * 100) / 100 + "px";
+        }
+      }
+      fit();
+      window.addEventListener("resize", fit);
+    })();
+  </script>
 </body>
 </html>

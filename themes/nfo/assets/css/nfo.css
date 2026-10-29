@@ -1,40 +1,29 @@
 /* nfo: a plain monospace theme with some warez scene .nfo flavor */
 
-:root {
-  /* long runs of characters, clipped to whatever width they land in */
-  --hline: "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────";
-  --hline2: "════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════";
-  --vline: "│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│";
-  --shade: "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-  --top: "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄";
-  --bot: "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀";
-}
-
-body {
-  --bg: #000000;
-  --fg: #ffffff;
-  --dim: #8c8c8c;
-  --link: #ffffff;
-  --hl: #2f3849;
-  color-scheme: dark;
-}
+/* this has to work on old browsers too (safari 8 on an ipad mini 1), so:
+   - no css variables, colors and the long line strings are written out
+     #000000 bg, #ffffff text and links, #8c8c8c dim, #2f3849 highlight
+   - flexbox gets -webkit- prefixes, no grid
+   - min() / container units have a js fallback in baseof.html */
 
 /* -------------------------------------------------------------- base */
 
-html { height: 100%; font-size: 14px; }
+html { height: 100%; font-size: 14px; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--bg);
-  color: var(--fg);
+  background: #000000;
+  color: #ffffff;
+  color-scheme: dark;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   font-size: 1rem;
   line-height: 1.4;
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
-::selection { background: var(--fg); color: var(--bg); }
+::selection { background: #ffffff; color: #000000; }
 
 .w {
   max-width: 80ch;
@@ -48,28 +37,29 @@ body {
 }
 
 a {
-  color: var(--link);
+  color: #ffffff;
   text-decoration: underline;
-  text-decoration-color: var(--dim);
+  text-decoration-color: #8c8c8c;
   text-underline-offset: 0.2em;
 }
 
-a:hover { text-decoration-color: var(--link); }
+a:hover { text-decoration-color: #ffffff; }
 
 p { margin: 1rem 0; }
 li { margin: 0.3rem 0; }
 
 img { display: block; max-width: 100%; margin: 0 auto; }
 
-*:target { background: var(--hl); }
+*:target { background: #2f3849; }
 
-.d, .k { color: var(--dim); }
+.d, .k { color: #8c8c8c; }
 
 .vh {
   position: absolute;
   width: 1px;
   height: 1px;
   overflow: hidden;
+  clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
 }
@@ -84,18 +74,18 @@ img { display: block; max-width: 100%; margin: 0 auto; }
 .nav { margin: 0 0 3rem; line-height: 1.15; }
 .nav > div { white-space: pre; }
 
-.nav .top, .nav .bot { overflow: hidden; color: var(--dim); }
-.nav .top::before { content: var(--top); }
-.nav .bot::before { content: var(--bot); }
+.nav .top, .nav .bot { overflow: hidden; color: #8c8c8c; }
+.nav .top::before { content: "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄"; }
+.nav .bot::before { content: "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"; }
 
-.nav .mid { display: flex; }
-.nav .mid > * { flex: none; }
-.nav .shade { flex: 1 1 0; min-width: 2ch; overflow: hidden; color: var(--dim); }
-.nav .shade::before { content: var(--shade); }
+.nav .mid { display: -webkit-flex; display: flex; }
+.nav .mid > * { -webkit-flex: none; flex: none; }
+.nav .shade { -webkit-flex: 1 1 0; flex: 1 1 0; min-width: 2ch; overflow: hidden; color: #8c8c8c; }
+.nav .shade::before { content: "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; }
 
 .nav a { text-decoration: none; }
 .nav a:hover { text-decoration: underline; }
-.nav b { background: var(--fg); color: var(--bg); }
+.nav b { background: #ffffff; color: #000000; }
 
 /* ------------------------------------------------------------- logo */
 
@@ -105,6 +95,7 @@ img { display: block; max-width: 100%; margin: 0 auto; }
 
 .logo .art {
   display: block;
+  width: -webkit-fit-content;
   width: fit-content;
   margin: 0 auto;
   white-space: pre;
@@ -112,7 +103,8 @@ img { display: block; max-width: 100%; margin: 0 auto; }
   /* fill the column like the nav bar. the column is 80ch of 1rem text,
      so 80rem / cols matches it exactly on desktop. on narrow screens
      fit the container width. --ch is the font's char width in em,
-     measured by the script in home.html, 0.6 if js is off. */
+     measured by the script in home.html, 0.6 if js is off.
+     browsers without min() keep 1rem and get sized by baseof.html. */
   font-size: min(80rem / var(--cols), 100cqw / (var(--cols) * var(--ch, 0.6)));
   overflow: hidden;
 }
@@ -158,24 +150,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ─┤ text ├──────── ── ─ */
-.h { display: flex; align-items: baseline; }
-.h .d, .box-top .d, .box-bot .d { flex: none; }
+.h { display: -webkit-flex; display: flex; -webkit-align-items: baseline; align-items: baseline; }
+.h .d, .box-top .d, .box-bot .d { -webkit-flex: none; flex: none; }
 .h .t, .box-top .t { min-width: 0; padding: 0 1ch; }
 
 .fill {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex: 1 1 0;
   flex: 1 1 0;
   min-width: 4ch;
   overflow: hidden;
   white-space: pre;
-  color: var(--dim);
+  color: #8c8c8c;
 }
 
-.fill::before { content: var(--hline); flex: 1 1 0; min-width: 0; overflow: hidden; }
-.fill::after { content: ""; flex: none; }
+.fill::before { content: "────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────"; -webkit-flex: 1 1 0; flex: 1 1 0; min-width: 0; overflow: hidden; white-space: pre; }
+.fill::after { content: ""; -webkit-flex: none; flex: none; }
 
 /* heading bars use a double line (boxes stay single) */
-.bar .fill::before { content: var(--hline2); }
+.bar .fill::before { content: "════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════"; }
 
 /* close boxes on the right with corners (headings stay open) */
 .box-top .fill::after { content: "┐"; }
@@ -190,24 +184,25 @@ h1, h2, h3, h4, h5, h6 {
 */
 .box { margin: 1.5rem 0; line-height: 1.15; }
 
-.box-top, .box-bot { display: flex; align-items: baseline; }
+.box-top, .box-bot { display: -webkit-flex; display: flex; -webkit-align-items: baseline; align-items: baseline; }
 .box-top .t { font-weight: bold; }
 
 .box-in {
   position: relative;
+  padding: 1.15em 3ch;
   padding: 1lh 3ch;
 }
 
 /* left and right │ columns that run the full height of the box */
 .box-in::before,
 .box-in::after {
-  content: var(--vline);
+  content: "│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│\A│";
   position: absolute;
   top: 0;
   bottom: 0;
   white-space: pre;
   overflow: hidden;
-  color: var(--dim);
+  color: #8c8c8c;
 }
 .box-in::before { left: 0; }
 .box-in::after { right: 0; }
@@ -216,11 +211,9 @@ h1, h2, h3, h4, h5, h6 {
 .box ul ul { padding-left: 2ch; }
 .box li { margin: 0; }
 
-.kv {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: 1ch;
-}
+/* key ..: value rows, the keys are padded to the same length */
+.kv > div { display: -webkit-flex; display: flex; }
+.kv .k { -webkit-flex: none; flex: none; margin-right: 1ch; }
 
 .kv h1 { margin: 0; }
 
@@ -228,13 +221,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* note/info/tip/warning/danger shortcodes. the accent (from dracula,
    to match the code blocks) colors the box lines; text stays white.
-   setting --dim locally repaints the corners, left bar and fill. */
-.callout-info    { --dim: #8be9fd; }
-.callout-tip     { --dim: #50fa7b; }
-.callout-warning { --dim: #ffb86c; }
-.callout-danger  { --dim: #ff5555; }
+   the top and bottom rows get the accent and their corners and fill
+   inherit it, the side bars get it directly. */
+.callout .box-top, .callout .box-bot { color: #8c8c8c; }
+.callout .d, .callout .fill { color: inherit; }
 
-.callout .box-top .t { color: var(--dim); }
+.callout-info .box-top, .callout-info .box-bot,
+.callout-info .box-in::before, .callout-info .box-in::after { color: #8be9fd; }
+.callout-tip .box-top, .callout-tip .box-bot,
+.callout-tip .box-in::before, .callout-tip .box-in::after { color: #50fa7b; }
+.callout-warning .box-top, .callout-warning .box-bot,
+.callout-warning .box-in::before, .callout-warning .box-in::after { color: #ffb86c; }
+.callout-danger .box-top, .callout-danger .box-bot,
+.callout-danger .box-in::before, .callout-danger .box-in::after { color: #ff5555; }
 .callout .box-in > :first-child { margin-top: 0; }
 .callout .box-in > :last-child { margin-bottom: 0; }
 
@@ -242,16 +241,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .list { padding: 0; list-style: none; }
 
-.list li {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  column-gap: 2ch;
-}
+.list li { display: -webkit-flex; display: flex; }
+.list .k { -webkit-flex: none; flex: none; margin-right: 2ch; }
 
 /* ---------------------------------------------------------- dividers */
 
 /* █▓▒░░░░░░░░░░░▒▓█ */
 hr {
+  display: -webkit-flex;
   display: flex;
   height: auto;
   margin: 2rem 0;
@@ -259,14 +256,14 @@ hr {
   overflow: hidden;
   white-space: pre;
   line-height: 1;
-  color: var(--dim);
+  color: #8c8c8c;
 }
 
-hr::before { content: "█▓▒" var(--shade); flex: 1 1 0; min-width: 0; overflow: hidden; }
-hr::after { content: "▒▓█"; flex: none; }
+hr::before { content: "█▓▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; -webkit-flex: 1 1 0; flex: 1 1 0; min-width: 0; overflow: hidden; white-space: pre; }
+hr::after { content: "▒▓█"; -webkit-flex: none; flex: none; }
 
 footer { margin-top: 4rem; }
-footer .tagline { color: var(--dim); }
+footer .tagline { color: #8c8c8c; }
 
 /* ------------------------------------------------------------- code */
 
@@ -274,8 +271,8 @@ pre, code { font-family: inherit; }
 
 :not(pre) > code {
   padding: 0.1em 0.3em;
-  background: var(--fg);
-  color: var(--bg);
+  background: #ffffff;
+  color: #000000;
   font-size: 90%;
 }
 
@@ -298,11 +295,11 @@ pre {
 blockquote {
   margin: 1.5rem 0;
   padding: 0 0 0 2ch;
-  border-left: 2px solid var(--dim);
-  color: var(--dim);
+  border-left: 2px solid #8c8c8c;
+  color: #8c8c8c;
 }
 
 table { width: 100%; border-collapse: collapse; }
-th, td { padding: 0.4rem; border: 1px solid var(--dim); }
+th, td { padding: 0.4rem; border: 1px solid #8c8c8c; }
 
-figcaption { text-align: center; color: var(--dim); }
+figcaption { text-align: center; color: #8c8c8c; }
