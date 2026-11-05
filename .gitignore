@@ -20,3 +20,4 @@ resources/
 Gemfile.lock
 
 .hugo_build.lock
+.wrangler/
