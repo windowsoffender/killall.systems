@@ -40,7 +40,7 @@
 </head>
 <body>
   <main class="w">
-    {{- if not .IsHome }}{{ partial "nav.html" . }}{{ end }}
+    {{- if not (or .IsHome (eq .Kind "404")) }}{{ partial "nav.html" . }}{{ end }}
     {{- block "main" . }}{{ end }}
     {{- partial "footer.html" . }}
   </main>

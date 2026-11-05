@@ -1,4 +1,7 @@
 {{ define "main" }}
-{{ partial "bar.html" (dict "level" 1 "text" "404 not found") }}
-<p>nothing here. file got nuked.</p>
+<header class="logo">
+  {{- partial "logo.html" . }}
+  <div class="tagline" style="--tcols: 27"><span class="d" aria-hidden="true">·-=≡=-</span> 404 not found <span class="d" aria-hidden="true">-=≡=-·</span></div>
+</header>
+<p style="text-align: center"><a href="{{ "" | relURL }}">go home</a></p>
 {{ end }}
