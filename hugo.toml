@@ -2,8 +2,6 @@ baseURL = 'https://killall.systems/'
 languageCode = 'en-us'
 title = 'killall.systems'
 theme = 'nfo'
-# theme = 'nostyleplease'
-# theme = 'vintage-web-hugo-theme'
 
 [module]
   [module.hugoVersion]

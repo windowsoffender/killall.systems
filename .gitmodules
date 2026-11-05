@@ -1,6 +1,0 @@
-[submodule "themes/nostyleplease"]
-	path = themes/nostyleplease
-	url = https://github.com/hanwenguo/hugo-theme-nostyleplease.git
-[submodule "themes/notrack"]
-	path = themes/notrack
-	url = https://github.com/gevhaz/hugo-theme-notrack.git
