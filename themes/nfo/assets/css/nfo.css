@@ -141,6 +141,9 @@ img { display: block; max-width: 100%; margin: 0 auto; }
 }
 .tagline p { display: inline; }
 
+/* the 404 one is bigger and sits further down */
+.tagline.big { margin-top: 3rem; font-size: 1.5rem; font-size: min(1.5rem, 100cqw / (var(--tcols, 60) * 0.62)); }
+
 /* --------------------------------------------------------- headings */
 
 h1, h2, h3, h4, h5, h6 {

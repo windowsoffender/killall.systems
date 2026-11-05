@@ -1,7 +1,8 @@
-  {{- /* logo.txt plus anything in logos/*.txt, one is picked at random on load */}}
+  {{- /* logo.txt plus anything in logos/*.txt, one is picked at random on load.
+     the 404 page only gets logo.txt */}}
   {{- $logos := slice }}
   {{- with resources.Get "logo.txt" }}{{ $logos = $logos | append . }}{{ end }}
-  {{- range resources.Match "logos/*.txt" }}{{ $logos = $logos | append . }}{{ end }}
+  {{- if ne .Kind "404" }}{{ range resources.Match "logos/*.txt" }}{{ $logos = $logos | append . }}{{ end }}{{ end }}
   {{- with $logos }}
   <h1><span class="vh">{{ site.Title }}</span>
     {{- range $i, $logo := . }}
